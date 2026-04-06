@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+    animation: bgChange 12s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Background animation */
+@keyframes bgChange {
+    0% { background: linear-gradient(135deg, #2c3e50, #4ca1af); }
+    50% { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+    100% { background: linear-gradient(135deg, #42275a, #734b6d); }
+}
+
+/* Container */
+.container {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Title */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Glowing Name */
+.name {
+    font-size: 1.6rem;
+    color: #ffeaa7;
+    animation: glow 2s infinite alternate;
+    margin-bottom: 15px;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 8px #ffeaa7; }
+    to { text-shadow: 0 0 18px #fd79a8; }
+}
+
+/* Typing text */
+.typing {
+    font-size: 1rem;
+    line-height: 1.6;
+    min-height: 140px;
+}
+
+/* Apology lines */
+.lines {
+    margin-top: 15px;
+    display: none;
+}
+
+.lines p {
+    margin: 6px 0;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    font-size: 0.95rem;
+}
+
+/* Final message */
+.final {
+    display: none;
+    font-size: 1.3rem;
+    margin-top: 15px;
+    color: #dfe6e9;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Floating particles (lighter for mobile) */
+.particle {
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Responsive tweaks */
+@media (max-width: 400px) {
+    h1 { font-size: 1.7rem; }
+    .name { font-size: 1.4rem; }
+    .typing { font-size: 0.95rem; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hey...</h1>
+    <div class="name">Akruti</div>
+
+    <div class="typing" id="text"></div>
+
+    <div class="lines" id="lines">
+        <p style="animation-delay:0.5s;">I truly didn’t mean to hurt you.</p>
+        <p style="animation-delay:1s;">I respect you, and I regret my words.</p>
+        <p style="animation-delay:1.5s;">You matter to me as a friend.</p>
+        <p style="animation-delay:2s;">I’ll make sure this doesn’t happen again.</p>
+        <p style="animation-delay:2.5s;">I’m really sorry…</p>
+    </div>
+
+    <div class="final" id="finalMessage">
+        I really value our friendship 🤍
+    </div>
+</div>
+
+<script>
+
+/* Message */
+const message = `Hey Akruti,
+
+I’ve been thinking about what happened today,
+and I feel really bad about it.
+
+I shouldn’t have spoken the way I did.
+You didn’t deserve that.
+
+No matter what the situation was,
+I respect you a lot, and I crossed a line.
+
+I don’t want one moment of anger
+to affect a friendship that actually matters to me.
+
+I genuinely mean it when I say,
+I’m sorry.`;
+
+/* Typing */
+let i = 0;
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+    } else {
+        document.getElementById("lines").style.display = "block";
+        document.getElementById("finalMessage").style.display = "block";
+    }
+}
+typeWriter();
+
+/* Particles (optimized) */
+function createParticle() {
+    const p = document.createElement("div");
+    p.classList.add("particle");
+
+    let size = Math.random() * 8 + 4;
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (Math.random() * 4 + 6) + "s";
+
+    document.body.appendChild(p);
+
+    setTimeout(() => p.remove(), 8000);
+}
+
+setInterval(createParticle, 500);
+
+</script>
+
+</body>
+</html>
